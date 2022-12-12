@@ -8,8 +8,8 @@ export const getCategories = async () => {
     return res
 }
 
-export const getIngredients = async () => {
-    const res = await axios.get(`${BASE_URL}${DEV_API_KEY}/list.php?i=list`)
+export const getAreas = async () => {
+    const res = await axios.get(`${BASE_URL}${DEV_API_KEY}/list.php?a=list`)
     return res
 }
 
