@@ -19,7 +19,9 @@ export const getRandomRecipe = async () => {
 };
 
 export const getFullRecipe = async (mealId) => {
-  const res = await axios.get(`${BASE_URL}${DEV_API_KEY}/lookup.php?i=${mealId}`);
+  const res = await axios.get(
+    `${BASE_URL}${DEV_API_KEY}/lookup.php?i=${mealId}`,
+  );
   return res;
 };
 
