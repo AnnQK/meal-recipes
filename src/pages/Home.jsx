@@ -1,19 +1,24 @@
 import { useEffect } from "react";
-import { fetchRandomRecipe } from "../store/mealsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CategoriesMenu from "../components/CategoriesMenu";
+import RandomMeal from "../components/RandomMeal";
+import { fetchCategories } from "../store/categoriesSlice";
+import { fetchRandomRecipe } from "../store/mealsSlice"
 
 function Home() {
     const dispatch = useDispatch();
-    const { randomMeal, status } = useSelector(state => state.meals)
-    console.log(status)
+    const { categories, status } = useSelector(state => state.categories)
+    const { randomMeal } = useSelector(state => state.meals)
     useEffect(() => {
+        dispatch(fetchCategories())
         dispatch(fetchRandomRecipe())
-
     }, [])
-    return (<div>
-        <div>meal of the day</div> - <h2>{randomMeal.strMeal}</h2>
-        <img src={randomMeal.strMealThumb} />
-    </div>);
+    return (
+        <>
+            <RandomMeal title={randomMeal.strMeal} imageSrc={randomMeal.strMealThumb} />
+            <CategoriesMenu list={categories} />
+        </>
+    )
 }
 
 export default Home;
