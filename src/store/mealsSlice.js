@@ -17,8 +17,29 @@ export const fetchRandomRecipe = createAsyncThunk(
   },
 );
 
+export const fetchPopularMeals = createAsyncThunk(
+  "meals/fetchPopular",
+
+  async function (_, { rejectWithValue }) {
+    const popularMeals = [];
+    try {
+      for (let i = 0; i < 5; i++) {
+        const { status, data } = await getRandomRecipe();
+        if (status < 200 || status > 300) {
+          throw new Error("Can't load random recipe");
+        }
+        popularMeals.push(data.meals[0]);
+      }
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
+    return popularMeals;
+  },
+);
+
 const initialState = {
   meals: [],
+  popularMeals: [],
   randomMeal: {},
   status: null,
   error: null,
@@ -37,6 +58,18 @@ const mealsSlice = createSlice({
       state.status = "success";
     },
     [fetchRandomRecipe.rejected]: (state, action) => {
+      state.status = "error";
+      state.error = action.payload;
+    },
+    [fetchPopularMeals.pending]: (state) => {
+      state.status = "loading";
+      state.error = null;
+    },
+    [fetchPopularMeals.fulfilled]: (state, action) => {
+      state.popularMeals = action.payload;
+      state.status = "success";
+    },
+    [fetchPopularMeals.rejected]: (state, action) => {
       state.status = "error";
       state.error = action.payload;
     },
