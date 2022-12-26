@@ -14,7 +14,7 @@ export const fetchCategories = createAsyncThunk(
     } catch (error) {
       rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 const initialState = {

@@ -8,6 +8,13 @@ export const getCategories = async () => {
   return res;
 };
 
+export const getMealsByCategory = async (category) => {
+  const res = await axios.get(
+    `${BASE_URL}${DEV_API_KEY}1/filter.php?c=${category}`,
+  );
+  return res;
+};
+
 export const getAreas = async () => {
   const res = await axios.get(`${BASE_URL}${DEV_API_KEY}/list.php?a=list`);
   return res;

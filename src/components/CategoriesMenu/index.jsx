@@ -4,11 +4,13 @@ function CategoriesMenu({ list }) {
     return (
         <ul>
             {list.map((category) => {
-                return <li>
-                    <NavLink to="">
-                        {category.strCategory}
-                    </NavLink>
-                </li>
+                return (
+                    <li key={category.idCategory} >
+                        <NavLink to={`categories/${category.strCategory}`}>
+                            {category.strCategory}
+                        </NavLink>
+                    </li>
+                )
             })}
         </ul>
     );

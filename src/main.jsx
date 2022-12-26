@@ -20,12 +20,12 @@ import Layout from "./pages/Layout";
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Layout />}>
-			<Route path="/" element={<Home />} />
+			<Route index element={<Home />} />
 			<Route path="/ingredients" element={<IngredientsPage />}>
 				<Route path="/ingredients/:ingredientId" element={<SingleIngredient />} />
 			</Route>
-			<Route path="/categories" element={<CategoriesPage />}>
-				<Route path="/categories/:categoryId" element={<SingleCategory />} />
+			<Route path="categories" element={<CategoriesPage />}>
+				<Route path=":categoryName" element={<SingleCategory />} />
 			</Route>
 			<Route path="/meals" element={<MealsPage />}>
 				<Route path="/meals/:mealId" element={<SingleMeal />} />
