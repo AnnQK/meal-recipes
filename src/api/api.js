@@ -27,6 +27,13 @@ export const getAreas = async () => {
   return res;
 };
 
+export const getMealsByArea = async (areaName) => {
+  const res = await axios.get(
+    `${BASE_URL}${DEV_API_KEY}/filter.php?a=${areaName}`,
+  );
+  return res;
+};
+
 export const getRandomRecipe = async () => {
   const res = await axios.get(`${BASE_URL}${DEV_API_KEY}/random.php`);
   return res;

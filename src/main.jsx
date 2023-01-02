@@ -9,26 +9,26 @@ import {
 	Route,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import IngredientsPage from "./pages/IngredientsPage";
-import SingleIngredient from "./pages/SingleIngredient";
 import CategoriesPage from "./pages/CategoriesPage";
 import SingleCategory from "./pages/SingleCategory";
 import MealsPage from "./pages/MealsPage";
 import SingleMeal from "./pages/SingleMeal";
 import Layout from "./pages/Layout";
+import AreasPage from "./pages/AreasPage";
+import SingleArea from "./pages/SingleArea";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<Layout />}>
 			<Route index element={<Home />} />
-			<Route path="/ingredients" element={<IngredientsPage />}>
-				<Route path="/ingredients/:ingredientId" element={<SingleIngredient />} />
-			</Route>
 			<Route path="categories" element={<CategoriesPage />}>
 				<Route path=":categoryName" element={<SingleCategory />} />
 			</Route>
 			<Route path="/meals" element={<MealsPage />}>
 				<Route path="/meals/:mealId" element={<SingleMeal />} />
+			</Route>
+			<Route path="/areas" element={<AreasPage />}>
+				<Route path="/areas/:areaName" element={<SingleArea />} />
 			</Route>
 		</Route>
 	)

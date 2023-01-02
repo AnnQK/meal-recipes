@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getMealsByCategory, getRandomRecipe, getsingleMeal } from "../api/api";
+import {
+  getMealsByCategory,
+  getRandomRecipe,
+  getsingleMeal,
+  getMealsByArea,
+} from "../api/api";
 
 export const fetchRandomRecipe = createAsyncThunk(
   "meals/fetchRandom",
@@ -69,6 +74,22 @@ export const fetchSingleMeal = createAsyncThunk(
   },
 );
 
+export const fetchMealsByArea = createAsyncThunk(
+  "meals/fetchMealsByArea",
+
+  async function (areaName, { rejectWithValue }) {
+    try {
+      const { status, data } = await getMealsByArea(areaName);
+      if (status < 200 || status > 300) {
+        throw new Error(`Can't load ${areaName}`);
+      }
+      return data.meals;
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
+  },
+);
+
 const initialState = {
   meals: [],
   popularMeals: [],
@@ -115,6 +136,18 @@ const mealsSlice = createSlice({
       state.status = "success";
     },
     [fetchMealsByCategory.rejected]: (state, action) => {
+      state.status = "error";
+      state.error = action.payload;
+    },
+    [fetchMealsByArea.pending]: (state) => {
+      state.status = "loading";
+      state.error = null;
+    },
+    [fetchMealsByArea.fulfilled]: (state, action) => {
+      state.meals = action.payload;
+      state.status = "success";
+    },
+    [fetchMealsByArea.rejected]: (state, action) => {
       state.status = "error";
       state.error = action.payload;
     },
