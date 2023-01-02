@@ -8,9 +8,16 @@ export const getCategories = async () => {
   return res;
 };
 
-export const getMealsByCategory = async (category) => {
+export const getMealsByCategory = async (categoryName) => {
   const res = await axios.get(
-    `${BASE_URL}${DEV_API_KEY}1/filter.php?c=${category}`,
+    `${BASE_URL}${DEV_API_KEY}/filter.php?c=${categoryName}`,
+  );
+  return res;
+};
+
+export const getsingleMeal = async (mealId) => {
+  const res = await axios.get(
+    `${BASE_URL}${DEV_API_KEY}/lookup.php?i=${mealId}`,
   );
   return res;
 };

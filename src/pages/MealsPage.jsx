@@ -1,5 +1,11 @@
+import { Outlet } from "react-router-dom";
+
 function MealsPage() {
-    return (<div></div>);
+    return (
+        <>
+            <Outlet />
+        </>
+    );
 }
 
 export default MealsPage;

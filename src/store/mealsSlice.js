@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getMealsByCategory, getRandomRecipe } from "../api/api";
+import { getMealsByCategory, getRandomRecipe, getsingleMeal } from "../api/api";
 
 export const fetchRandomRecipe = createAsyncThunk(
   "meals/fetchRandom",
@@ -38,7 +38,7 @@ export const fetchPopularMeals = createAsyncThunk(
 );
 
 export const fetchMealsByCategory = createAsyncThunk(
-  "categories/fetchMealsByCategory",
+  "meals/fetchMealsByCategory",
 
   async function (category, { rejectWithValue }) {
     try {
@@ -46,7 +46,23 @@ export const fetchMealsByCategory = createAsyncThunk(
       if (status < 200 || status > 300) {
         throw new Error(`Can't load ${category.toLowerCase()} meals`);
       }
-      return data;
+      return data.meals;
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
+  },
+);
+
+export const fetchSingleMeal = createAsyncThunk(
+  "categories/fetchSingleMeal",
+
+  async function (meal, { rejectWithValue }) {
+    try {
+      const { status, data } = await getsingleMeal(meal);
+      if (status < 200 || status > 300) {
+        throw new Error(`Can't load ${meal.toLowerCase()} info`);
+      }
+      return data.meals[0];
     } catch (error) {
       rejectWithValue(error.message);
     }
@@ -57,6 +73,7 @@ const initialState = {
   meals: [],
   popularMeals: [],
   randomMeal: {},
+  singleMeal: {},
   status: null,
   error: null,
 };
@@ -98,6 +115,18 @@ const mealsSlice = createSlice({
       state.status = "success";
     },
     [fetchMealsByCategory.rejected]: (state, action) => {
+      state.status = "error";
+      state.error = action.payload;
+    },
+    [fetchSingleMeal.pending]: (state) => {
+      state.status = "loading";
+      state.error = null;
+    },
+    [fetchSingleMeal.fulfilled]: (state, action) => {
+      state.singleMeal = action.payload;
+      state.status = "success";
+    },
+    [fetchSingleMeal.rejected]: (state, action) => {
       state.status = "error";
       state.error = action.payload;
     },

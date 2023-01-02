@@ -1,21 +1,23 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import MealCard from "../components/MealCard";
 import { fetchMealsByCategory } from "../store/mealsSlice";
 
 function SingleCategory() {
-    const categoryName = useParams()
-    console.log(categoryName)
-    // const { meals } = useSelector(state => state.meals);
-    // const dispatch = useDispatch();
-    // console.log(meals)
+    const { categoryName } = useParams()
+    const { meals } = useSelector(state => state.meals);
+    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(fetchMealsByCategory())
-    // }, [])
+    useEffect(() => {
+        dispatch(fetchMealsByCategory(categoryName))
+    }, [])
+
     return (
         <div>
-            Category
+            {meals.map((meal) => {
+                return <MealCard key={meal.idMeal} idMeal={meal.idMeal} title={meal.strMeal} imageUrl={meal.strMealThumb} country={meal.strArea} />
+            })}
         </div>
     );
 }

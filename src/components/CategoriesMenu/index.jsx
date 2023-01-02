@@ -6,7 +6,7 @@ function CategoriesMenu({ list }) {
             {list.map((category) => {
                 return (
                     <li key={category.idCategory} >
-                        <NavLink to={`categories/${category.strCategory}`}>
+                        <NavLink to={`/categories/${category.strCategory}`}>
                             {category.strCategory}
                         </NavLink>
                     </li>

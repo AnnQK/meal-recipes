@@ -10,6 +10,7 @@ function Home() {
     const dispatch = useDispatch();
     const { categories, status } = useSelector(state => state.categories)
     const { randomMeal, popularMeals } = useSelector(state => state.meals)
+
     useEffect(() => {
         dispatch(fetchCategories())
         dispatch(fetchRandomRecipe())
@@ -20,7 +21,7 @@ function Home() {
             <RandomMeal title={randomMeal.strMeal} imageSrc={randomMeal.strMealThumb} />
             <CategoriesMenu list={categories} />
             {popularMeals.map((meal) => {
-                return <MealCard title={meal.strMeal} imageUrl={meal.strMealThumb} country={meal.strArea} />
+                return <MealCard key={meal.idMeal} idMeal={meal.idMeal} title={meal.strMeal} imageUrl={meal.strMealThumb} country={meal.strArea} />
             })}
         </>
     )
