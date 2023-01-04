@@ -1,9 +1,12 @@
+
+import { Container } from '@mui/material';
+
 function RandomMeal({ title, imageSrc }) {
     return (
-        <div>
+        <Container sx={{ mt: "100px" }}>
             <h2>{title}</h2>
             <img src={imageSrc} />
-        </div>
+        </Container>
     );
 }
 
