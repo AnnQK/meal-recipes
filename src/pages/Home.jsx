@@ -8,9 +8,8 @@ import { fetchPopularMeals, fetchRandomRecipe } from "../store/mealsSlice"
 
 function Home() {
     const dispatch = useDispatch();
-    const { categories, status } = useSelector(state => state.categories)
-    const { randomMeal, popularMeals } = useSelector(state => state.meals)
-
+    const { categories } = useSelector(state => state.categories)
+    const { meals, randomMeal, popularMeals } = useSelector(state => state.meals)
     useEffect(() => {
         dispatch(fetchCategories())
         dispatch(fetchRandomRecipe())
