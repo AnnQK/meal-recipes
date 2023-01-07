@@ -28,7 +28,7 @@ export const fetchPopularMeals = createAsyncThunk(
   async function (_, { rejectWithValue }) {
     const popularMeals = [];
     try {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 9; i++) {
         const { status, data } = await getRandomRecipe();
         if (status < 200 || status > 300) {
           throw new Error("Can't load popular meals");

@@ -9,7 +9,7 @@ const StyledContainer = styled(Paper)(props => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundImage: `url(${props.imageSrc})`,
+    backgroundImage: `url(${props.imagesrc})`,
     backgroundPosition: "center",
     backgroundSize: "contain",
     cursor: "pointer",
@@ -29,7 +29,7 @@ function RandomMeal({ title, imageSrc, idMeal }) {
         navigate(`/meals/${idMeal}`)
     }
     return (
-        <StyledContainer onClick={randomMealRoute} elevation={3} imageSrc={imageSrc}>
+        <StyledContainer onClick={randomMealRoute} elevation={3} imagesrc={imageSrc}>
             <MainHeader component={"h1"}>{title}</MainHeader>
         </StyledContainer>
     );

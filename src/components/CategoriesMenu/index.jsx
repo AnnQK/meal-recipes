@@ -1,18 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { List, ListItem, ListItemText, Stack, Link, Paper } from "@mui/material";
 
 function CategoriesMenu({ list }) {
     return (
-        <ul>
+        <Stack direction={"row"} spacing={1} justifyContent="center"
+            alignItems="center" >
             {list.map((category) => {
                 return (
-                    <li key={category.idCategory} >
-                        <NavLink to={`/categories/${category.strCategory}`}>
+                    <Paper elevation={2} variant={"elevation"} sx={{ padding: "5px 10px" }}>
+                        <Link component={RouterLink} to={`/categories/${category.strCategory}`} underline={"none"}>
                             {category.strCategory}
-                        </NavLink>
-                    </li>
+                        </Link>
+                    </Paper>
                 )
             })}
-        </ul>
+        </Stack>
     );
 }
 
