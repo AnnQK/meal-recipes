@@ -13,7 +13,6 @@ function SingleArea() {
     }, [])
     return (
         <>
-            <h2>Meals from {areaName}</h2>
             {meals.map((meal) => {
                 return <MealCard key={meal.idMeal} idMeal={meal.idMeal} title={meal.strMeal} imageUrl={meal.strMealThumb} country={meal.strArea} />
             })}

@@ -23,7 +23,7 @@ width: clamp(300px,58.3vw,700px);
 text-align:center;
 `
 
-function RandomMeal({ title, imageSrc, idMeal }) {
+function RandomMeal({ title, imageSrc, idMeal, status }) {
     const navigate = useNavigate()
     const randomMealRoute = () => {
         navigate(`/meals/${idMeal}`)
